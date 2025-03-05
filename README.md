@@ -9,8 +9,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## 1. Clone the repo
 
 ```bash
-git clone https://github.com/TPJamesH/User-Management-Spring-boot.git
-cd User-Management-Spring-boot
+git clone https://github.com/TPJamesH/User-Management-Spring-boot-.git
+cd User-Management-Spring-boot-
 ```
 
 ## 2. Run the script
@@ -28,15 +28,9 @@ sudo chmod +x ./setup.sh
 .\setup.bat
 ```
 
-# Backend setup
+# Frontend setup
 
-## 1. go to NodeJSBackendPseudoImplementation
-
-```bash
-cd  NodeJSBackendPseudoImplementation
-```
-
-## 2. Run the script
+## 1. Run the script
 
 ### Linux/MacOS
 
