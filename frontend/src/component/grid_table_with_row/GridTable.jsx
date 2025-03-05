@@ -14,6 +14,7 @@ const GridTable = ({
     //Due to closures, loadItemPaginated has already captured pageNo and pageSize when it was created in the UserTableWithRow component
     const { items, fetchItems, setItems } = useGridTableLoadData(loadItemPaginated)
     return (
+       
         <>
             < NewItemModal reloadFunction={fetchItems} />
 

@@ -5,7 +5,8 @@ import CustomerUrlConfig from "../../../service_url/CustomerUrlConfig";
         CustomerUrlConfig.CUSTOMER_SHOWBYPAGE + `?pageNo=${pageNo}&pageSize=${pageSize}`
     );
 
-    let arr = customerResponse.json.customers
+    console.log(customerResponse);
+    let arr = customerResponse.json.dto.content
     let i = 0
     arr.forEach((element) => {
         element.token = customerResponse.json.tokens[i]
