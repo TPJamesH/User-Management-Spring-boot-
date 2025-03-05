@@ -6,44 +6,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Frontend setup
 
-## 1. Clone the repo
+## Clone the repo
 
 ```bash
 git clone https://github.com/TPJamesH/User-Management-Spring-boot-.git
 cd User-Management-Spring-boot-
 ```
 
-## 2. Run the script
-
-### Linux/MacOS
-
-```bash
-sudo chmod +x ./setup.sh
-./setup.sh
-```
-
-#### Windows
-
-```
-.\setup.bat
-```
-
-# Frontend setup
-
-## 1. Run the script
-
-### Linux/MacOS
-
-```bash
-sudo chmod +x ./setup.sh
-./setup.sh
-```
-
-#### Windows
-
-```
-.\setup.bat
-```
 
 In the project directory, you can run:
 
