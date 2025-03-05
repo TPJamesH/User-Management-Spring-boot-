@@ -9,7 +9,8 @@ export default function UserTableWithRow() {
     const pageSize = 5
     const pageNo = 0
     //a higher-order function that returns another function
-    const loadItemPaginated = (pageNo,pageSize) => showByPage(pageNo,pageSize) //reference instead of call
+    const loadItemPaginated = (pageNo,pageSize) => showByPage(pageNo,pageSize) //reference instead of call 
+    const defaultLoadItem = () => loadItemPaginated(pageNo,pageSize);
     return (
         <GridTable RowComponent={UserRow}
             loadItemApi={loadUserData}
@@ -17,6 +18,7 @@ export default function UserTableWithRow() {
             NewItemModal={NewUserModal}
             SearchPanel={SearchPanel}
             loadItemPaginated={loadItemPaginated}
+            defaultLoadItem={defaultLoadItem}
             pageSize = {pageSize}
             pageNo = {pageNo}
 

@@ -1,6 +1,5 @@
 import useGridTableLoadData from "./hook/useGetGridTableData";
-import showByPage from "../pagination_component/api/showByPage";
-const GridTable = ({
+const  GridTable = ({
     RowComponent,
     NewItemModal,
     SearchPanel,
@@ -8,11 +7,12 @@ const GridTable = ({
     loadItemPaginated,
     pageSize,
     pageNo,
-    loadItemApi
+    loadItemApi,
+    defaultLoadItem
 
 }) => {
     //Due to closures, loadItemPaginated has already captured pageNo and pageSize when it was created in the UserTableWithRow component
-    const { items, fetchItems, setItems } = useGridTableLoadData(loadItemPaginated)
+    const { items, fetchItems, setItems } = useGridTableLoadData(defaultLoadItem)
     return (
        
         <>
@@ -45,7 +45,7 @@ const GridTable = ({
                         {items && items.length > 0 ?
                             items.map((item, index) => (
                                 <RowComponent item={item} key={index} reloadFunction={fetchItems} setItems ={setItems}/>
-                            )) : (<p className="transform translate-x-3/4">No items available</p>)}
+                            )) : (<tr><td>No items available</td></tr>)}
 
                     </tbody>
                 </table>

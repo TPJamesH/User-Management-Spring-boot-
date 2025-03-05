@@ -1,12 +1,10 @@
 package eeet2582.week3.customer;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import eeet2582.week3.customer.dto.CustomerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,14 +41,14 @@ public class CustomerController {
         return customerService.createCustomer(customerData);
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("{id}")
     ResponseEntity<CustomerDTO> updateCustomer(@RequestBody CustomerEntity customerData, @PathVariable String id) {
         Optional<CustomerDTO> retrieve = customerService.updateCustomer(customerData, id);
         return retrieve.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     ResponseEntity<CustomerDTO> deleteCustomer(@PathVariable String id) {
         Optional<CustomerDTO> retrieve = customerService.deleteCustomer(id);
         return retrieve.map(ResponseEntity::ok)

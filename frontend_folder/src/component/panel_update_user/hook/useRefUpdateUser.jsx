@@ -12,15 +12,13 @@ const useRefUpdateUser = () => {
         return formValues
     }
 
-    const submitUser = async (e, reloadUsersFunc, token,setItems) => {
+    const submitUser = async (e, reloadUsersFunc, token) => {
         e.preventDefault(); //prevent default submission handler
         const user = constructUser(); //get form data as object
         let response = await updateUser(user, token);
         if (response.status == 200) {
-            reloadUsersFunc()
+            reloadUsersFunc();
         }
-
-        // handle error cases here
     }
     return {
         userFormRef,

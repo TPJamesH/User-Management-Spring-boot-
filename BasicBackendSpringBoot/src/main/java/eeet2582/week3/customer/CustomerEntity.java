@@ -2,7 +2,6 @@ package eeet2582.week3.customer;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.Data;
 @Document(collection = "customers")
 /**
 * Defines the data structure*/
