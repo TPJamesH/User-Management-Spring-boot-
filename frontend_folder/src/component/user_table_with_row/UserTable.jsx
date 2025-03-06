@@ -10,6 +10,7 @@ export default function UserTableWithRow() {
     const pageNo = 0
     //a higher-order function that returns another function
     const loadItemPaginated = (pageNo,pageSize) => showByPage(pageNo,pageSize) //reference instead of call 
+    //arrow function that gets activated when called defaultLoadItem()
     const defaultLoadItem = () => loadItemPaginated(pageNo,pageSize);
     return (
         <GridTable RowComponent={UserRow}

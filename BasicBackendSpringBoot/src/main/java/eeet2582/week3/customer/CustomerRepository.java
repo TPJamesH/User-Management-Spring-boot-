@@ -11,7 +11,7 @@ import java.util.Optional;
  * Provides methods to interact with the database to store and retrieve
  * entities.
  */
-public interface CustomerRepository extends MongoRepository<CustomerEntity, String>{
+public interface CustomerRepository extends MongoRepository<CustomerEntity, String> {
 
     Optional<CustomerEntity> findById(String id);
 
@@ -19,15 +19,18 @@ public interface CustomerRepository extends MongoRepository<CustomerEntity, Stri
             "{ 'firstName': { $regex: ?0, $options: 'i' } }, " +
             "{ 'lastName': { $regex: ?0, $options: 'i' } }, " +
             "{ 'email': { $regex: ?0, $options: 'i' } }, " +
-            "{ $expr:  {$regexMatch:  {input: {$concat: ['$firstName', ' ','$lastName']}, regex:  ?0, options:  'i'}}}" +
-"] }")
+            "{ $expr:  {$regexMatch:  {input: {$concat: ['$firstName', ' ','$lastName']}, regex:  ?0, options:  'i'}}}"
+            +
+            "] }")
 
     List<CustomerEntity> findCustomerEntityBySearchText(@Param("searchText") String searchText);
 
     List<CustomerEntity> findByFirstName(String firstName);
+
     List<CustomerEntity> findByLastName(String lastName);
+
     List<CustomerEntity> findByEmail(String email);
+
     List<CustomerEntity> findByBalance(double balance);
 
-    
-} 
+}

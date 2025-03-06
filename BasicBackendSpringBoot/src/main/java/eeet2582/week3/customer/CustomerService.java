@@ -26,9 +26,9 @@ class CustomerService {
 
     private CustomerDTO converter = new CustomerDTO();
 
-    //In-memory cache for the token-to-ID map
-    private final Map<String, String> tokenCache= new ConcurrentHashMap<>();
-    //Temporary token-to-ID map
+    // In-memory cache for the token-to-ID map
+    private final Map<String, String> tokenCache = new ConcurrentHashMap<>();
+    // Temporary token-to-ID map
     private final Map<String, String> tokenToIdMap = new ConcurrentHashMap<>();
 
     List<CustomerDTO> getCustomerByEmail(String email) {
@@ -50,44 +50,42 @@ class CustomerService {
 
         List<CustomerDTO> customerDTOs = customers.stream().map(converter::toDTO).collect(Collectors.toList());
 
-        //Generate tokens
-        List<String>tokens = customers.stream().map(
-            customer ->{
-            String token = UUID.randomUUID().toString(); //Generate token
-            tokenCache.put(token,customer.getId());
-            tokenToIdMap.put(token, customer.getId()); //Map token
-            return token;
-        }).collect(Collectors.toList());
+        // Generate tokens
+        List<String> tokens = customers.stream().map(
+                customer -> {
+                    String token = UUID.randomUUID().toString(); // Generate token
+                    tokenCache.put(token, customer.getId());
+                    tokenToIdMap.put(token, customer.getId()); // Map token
+                    return token;
+                }).collect(Collectors.toList());
 
-        //Return both DTOs and tokens as a response
-        Map<String,Object> response = new HashMap<>();
-        response.put("dto",customerDTOs);
-        response.put("tokens",tokens);
+        // Return both DTOs and tokens as a response
+        Map<String, Object> response = new HashMap<>();
+        response.put("dto", customerDTOs);
+        response.put("tokens", tokens);
         return response;
     }
 
-    
-
-    public Map<String,Object> searchCustomers(String searchText) {
+    public Map<String, Object> searchCustomers(String searchText) {
         List<CustomerEntity> customers = customerRepository.findCustomerEntityBySearchText(searchText);
 
         List<CustomerDTO> customerDTOs = customers.stream().map(converter::toDTO).collect(Collectors.toList());
 
-        //Generate tokens
-        List<String>tokens = customers.stream().map(
-            customer ->{
-            String token = UUID.randomUUID().toString(); //Generate token
-            tokenCache.put(token,customer.getId());
-            tokenToIdMap.put(token, customer.getId()); //Map token
-            return token;
-        }).collect(Collectors.toList());
+        // Generate tokens
+        List<String> tokens = customers.stream().map(
+                customer -> {
+                    String token = UUID.randomUUID().toString(); // Generate token
+                    tokenCache.put(token, customer.getId());
+                    tokenToIdMap.put(token, customer.getId()); // Map token
+                    return token;
+                }).collect(Collectors.toList());
 
-        //Return both DTOs and tokens as a response
-        Map<String,Object> response = new HashMap<>();
-        response.put("dto",customerDTOs);
-        response.put("tokens",tokens);
+        // Return both DTOs and tokens as a response
+        Map<String, Object> response = new HashMap<>();
+        response.put("dto", customerDTOs);
+        response.put("tokens", tokens);
         return response;
-      
+
     }
 
     public Optional<List<CustomerDTO>> getFilterFirstName(String firstName) {
@@ -129,23 +127,23 @@ class CustomerService {
 
         List<CustomerDTO> customerDTOs = customers.stream().map(converter::toDTO).collect(Collectors.toList());
 
-        //Generate tokens
-        List<String>tokens = customers.stream().map(
-            customer ->{
-            String token = UUID.randomUUID().toString(); //Generate token
-            tokenCache.put(token,customer.getId());
-            tokenToIdMap.put(token, customer.getId()); //Map token
-            return token;
-        }).collect(Collectors.toList());
+        // Generate tokens
+        List<String> tokens = customers.stream().map(
+                customer -> {
+                    String token = UUID.randomUUID().toString(); // Generate token
+                    tokenCache.put(token, customer.getId());
+                    tokenToIdMap.put(token, customer.getId()); // Map token
+                    return token;
+                }).collect(Collectors.toList());
 
-        //Return both DTOs and tokens as a response
-        Map<String,Object> response = new HashMap<>();
-        response.put("dto",new PageImpl<>(customerDTOs));
-        response.put("tokens",tokens);
+        // Return both DTOs and tokens as a response
+        Map<String, Object> response = new HashMap<>();
+        response.put("dto", new PageImpl<>(customerDTOs));
+        response.put("tokens", tokens);
         return response;
         // return new PageImpl<>(
-        //         converter.toDTO(
-        //                 this.customerRepository.findAll(pageable).getContent()));
+        // converter.toDTO(
+        // this.customerRepository.findAll(pageable).getContent()));
     }
 
 }

@@ -68,14 +68,14 @@ public class CustomerController {
     }
 
     @GetMapping("/search/{searchText}")
-    ResponseEntity<Map<String,Object>> searchCustomers(@PathVariable String searchText) {
-        Map<String, Object> customers =   customerService.searchCustomers(searchText);
+    ResponseEntity<Map<String, Object>> searchCustomers(@PathVariable String searchText) {
+        Map<String, Object> customers = customerService.searchCustomers(searchText);
 
         if (customers == null || customers.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(customers, HttpStatus.OK);
-      
+
     }
 
     // @GetMapping("/defaultAll")
