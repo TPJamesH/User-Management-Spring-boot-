@@ -19,7 +19,10 @@ const  GridTable = ({
             < NewItemModal reloadFunction={fetchItems} />
 
 
-            <SearchPanel setFunction={setItems} />
+            <SearchPanel setFunction={setItems}
+                         pageNo={pageNo}
+                         pageSize={pageSize}
+             />
             <div className="relative overflow-x-auto flex justify-center">
                 <table className="text-sm text-center rtl:text-right text-gray-500 ">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
