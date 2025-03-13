@@ -77,6 +77,20 @@ public class CustomerController {
         return new ResponseEntity<>(customers, HttpStatus.OK);
 
     }
+    @GetMapping("/search/paginated_search/{searchText}")
+    ResponseEntity<Map<String, Object>>  getPagination_Search(
+        @RequestParam(defaultValue = "0") int pageNo,
+        @RequestParam(defaultValue = "7") int pageSize,
+        @PathVariable String searchText) {
+            Map<String, Object> customers = customerService.getPagination_Search(PageRequest.of(pageNo, pageSize),searchText);
+
+        if (customers == null || customers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+
+    }
+   
 
     // @GetMapping("/defaultAll")
     // ResponseEntity<List<CustomerEntity>> getAllCustomersDefault() {

@@ -46,11 +46,14 @@ class CustomerService {
     // }
 
     public Map<String, Object> getAllCustomers() {
+        tokenCache.clear();
+        tokenToIdMap.clear();
         List<CustomerEntity> customers = customerRepository.findAll();
 
         List<CustomerDTO> customerDTOs = customers.stream().map(converter::toDTO).collect(Collectors.toList());
 
         // Generate tokens
+        
         List<String> tokens = customers.stream().map(
                 customer -> {
                     String token = UUID.randomUUID().toString(); // Generate token
@@ -67,6 +70,8 @@ class CustomerService {
     }
 
     public Map<String, Object> searchCustomers(String searchText) {
+        tokenCache.clear();
+        tokenToIdMap.clear();
         List<CustomerEntity> customers = customerRepository.findCustomerEntityBySearchText(searchText);
 
         List<CustomerDTO> customerDTOs = customers.stream().map(converter::toDTO).collect(Collectors.toList());
@@ -122,7 +127,8 @@ class CustomerService {
     }
 
     public Map<String, Object> getCustomerPage(Pageable pageable) {
-
+        tokenCache.clear();
+        tokenToIdMap.clear();
         List<CustomerEntity> customers = this.customerRepository.findAll(pageable).getContent();
 
         List<CustomerDTO> customerDTOs = customers.stream().map(converter::toDTO).collect(Collectors.toList());
@@ -146,4 +152,26 @@ class CustomerService {
         // this.customerRepository.findAll(pageable).getContent()));
     }
 
+    public Map<String,Object> getPagination_Search(Pageable pageable,String searchText){
+        tokenCache.clear();
+        tokenToIdMap.clear();
+        List<CustomerEntity> customers = customerRepository.findCustomerEntityBySearchTextPaginated(pageable,searchText);
+        List<CustomerDTO> customerDTOs = customers.stream().map(converter::toDTO).collect(Collectors.toList());
+
+        // Generate tokens
+        List<String> tokens = customers.stream().map(
+                customer -> {
+                    String token = UUID.randomUUID().toString(); // Generate token
+                    tokenCache.put(token, customer.getId());
+                    tokenToIdMap.put(token, customer.getId()); // Map token
+                    return token;
+                }).collect(Collectors.toList());
+
+        // Return both DTOs and tokens as a response
+        Map<String, Object> response = new HashMap<>();
+        response.put("dto", new PageImpl<>(customerDTOs));
+        response.put("tokens", tokens);
+        return response;
+
+    }
 }

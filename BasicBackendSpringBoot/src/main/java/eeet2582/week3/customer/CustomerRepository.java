@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Pageable;
 
 /**
  * CustomerRepository
@@ -24,6 +25,8 @@ public interface CustomerRepository extends MongoRepository<CustomerEntity, Stri
             "] }")
 
     List<CustomerEntity> findCustomerEntityBySearchText(@Param("searchText") String searchText);
+    //    List<Product> findAllByPrice(double price, Pageable pageable);
+    List<CustomerEntity> findCustomerEntityBySearchTextPaginated(Pageable pageable,String searchText);
 
     List<CustomerEntity> findByFirstName(String firstName);
 
